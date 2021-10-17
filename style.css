@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap");
 
 /*
 font-family: 'PT Sans', sans-serif;
 font-family: 'PT Serif', serif;
 */
 
-section, div {
+section,
+div {
     padding: 15px;
 }
 
@@ -13,10 +14,10 @@ hr {
     padding-top: 20px;
 }
 
-h3 { 
-    font-family: 'PT Serif', serif;
+h3 {
+    font-family: "PT Serif", serif;
     font-size: 18px;
-    margin: 2px;    
+    margin: 2px;
 }
 
 .box {
@@ -24,14 +25,16 @@ h3 {
     margin-left: 20px;
 }
 
-p, label, form {
-    font-family: 'PT Serif', serif;
+p,
+label,
+form {
+    font-family: "PT Serif", serif;
     font-size: 14px;
     margin: 2px;
 }
 
 #form {
-    font-family: 'PT Serif', serif;
+    font-family: "PT Serif", serif;
     font-size: 14px;
     display: flex;
     justify-content: center;
@@ -39,9 +42,9 @@ p, label, form {
 }
 
 #input-field label {
-  display: inline-block;
-  width: 115px;
-  text-align: right;
+    display: inline-block;
+    width: 115px;
+    text-align: right;
 }
 
 #dropdown {
@@ -64,16 +67,17 @@ p, label, form {
     justify-content: center;
     align-items: center;
     font-size: 50px;
-    font-family: 'PT Serif', serif;
+    font-family: "PT Serif", serif;
     letter-spacing: 3px;
+    color: red;
 }
 
-input[type=submit] {
+input[type="submit"] {
     background-color: #008000;
-    color: #FFF;
+    color: #fff;
     border-radius: 15px;
     border: none;
-    font-family: 'PT Serif', serif;
+    font-family: "PT Serif", serif;
     font-size: 24px;
     font-weight: 600;
     padding: 16px 32px;

@@ -54,6 +54,32 @@
         
         let summa = 0;
 
+        let eesnimi = document.getElementById("fname").value
+        let perenimi = document.getElementById("lname").value
+
+        var letters = /^[A-Za-z]+$/;
+
+        if (eesnimi == '') {
+            alert("Palun sisestage eesnimi");
+
+            return;
+        }
+        if (!eesnimi.match(letters)) {
+            alert("Eesnimi tohib sisaldada ainult tähti");
+
+            return;
+        }
+        if (perenimi == '') {
+            alert("Palun sisestage perenimi");
+
+            return;
+        }
+        if (!perenimi.match(letters)) {
+            alert("Perenimi tohib sisaldada ainult tähti");
+
+            return;
+        }
+
         let linn = document.getElementById("linn");
         
         if (linn.value === "") {
@@ -89,8 +115,15 @@
         let kontaktivaba = document.getElementById('v2').checked;
         if (kontaktivaba) summa += 1;
 
+        let eraisik = document.getElementById('r1').checked;
         let ettevote = document.getElementById('r2').checked;
-        console.log(ettevote);
+
+        if (!(ettevote || eraisik)) {
+            alert("Palun valige kas eraisik või ettevõte");
+            
+            return;
+        }
+
         if (ettevote) summa /= 1.2;
 
         e.innerHTML = Math.round(summa * 100) / 100 + ' &euro;';
@@ -105,6 +138,7 @@
 let mapAPIKey = "AqLLRE37SJGqIxXEYxezPUa6fF2oCzl3cvG4n05FtFIVBrotBYxchpMYYpwuxBak";
 
 let map;
+let infobox;
 
 function GetMap() {
     
@@ -123,6 +157,11 @@ function GetMap() {
         disablePanning: true
     });
     
+    infobox = new Microsoft.Maps.Infobox(centerPoint, {
+        visible: false
+    });
+
+    infobox.setMap(map);
 
     let UTLocation = new Microsoft.Maps.Location(
         58.38104, 
@@ -130,9 +169,13 @@ function GetMap() {
     );
     let pushUTpin = new Microsoft.Maps.Pushpin(UTLocation, {
         title: 'Tartu Ülikool',
-        //subTitle: 'Hea koht',
-        //text: 'UT'
+        text: 'UT'
     });
+    pushUTpin.metadata = {
+        title: 'Tartu Ülikool',
+        description: 'Hea koht'
+    };
+    Microsoft.Maps.Events.addHandler(pushUTpin, 'click', pushpinClicked);
 
     let TLULocation = new Microsoft.Maps.Location(
         59.438805,
@@ -140,12 +183,28 @@ function GetMap() {
     );
     let pushTLUpin = new Microsoft.Maps.Pushpin(TLULocation, {
         title: 'Tallinna Ülikool',
+        text: 'TLÜ'
     });
-
+    pushTLUpin.metadata = {
+        title: 'Tallinna Ülikool',
+        description: 'Ka hea koht'
+    };
+    Microsoft.Maps.Events.addHandler(pushTLUpin, 'click', pushpinClicked);
 
     map.entities.push(pushUTpin);
     map.entities.push(pushTLUpin);
 
+}
+
+function pushpinClicked(e) {
+    if (e.target.metadata) {
+        infobox.setOptions({
+            location: e.target.getLocation(),
+            title: e.target.metadata.title,
+            description: e.target.metadata.description,
+            visible: true
+        });
+    }
 }
 
 // https://dev.virtualearth.net/REST/v1/Locations?q=1000 Vin Scully Ave, Los Angeles,CA&key=YOUR_KEY_HERE
